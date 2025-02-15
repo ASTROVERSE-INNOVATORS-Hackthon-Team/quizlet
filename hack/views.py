@@ -1,11 +1,12 @@
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
 from rest_framework import generics
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from .models import Quiz, Question, UserProgress
 from .serializers import QuizSerializer, QuestionSerializer, UserProgressSerializer
 
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
-@method_decorator(csrf_exempt, name='dispatch')
+@method_decorator(csrf_exempt, name='dispatch')  # Apply CSRF exemption (if needed)
 class QuizListCreateView(generics.ListCreateAPIView):
     queryset = Quiz.objects.all()
     serializer_class = QuizSerializer
