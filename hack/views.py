@@ -1,4 +1,5 @@
 from django.utils.decorators import method_decorator
+from .utils import generate_quiz_questions
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
 from rest_framework import generics
@@ -13,8 +14,8 @@ class QuizListCreateView(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticatedOrReadOnly]  # Allow public GET, restrict POST
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
-
+        quiz = serializer.save(user=self.request.user)  # Save and assign to quiz
+        generate_quiz_questions(quiz)  
 
 class QuestionListView(generics.ListAPIView):
     serializer_class = QuestionSerializer
