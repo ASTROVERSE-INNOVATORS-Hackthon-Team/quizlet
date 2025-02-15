@@ -4,13 +4,15 @@ from rest_framework.permissions import IsAuthenticated
 from .models import Quiz, Question, UserProgress
 from .serializers import QuizSerializer, QuestionSerializer, UserProgressSerializer
 
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+@method_decorator(csrf_exempt, name='dispatch')
 class QuizListCreateView(generics.ListCreateAPIView):
     queryset = Quiz.objects.all()
     serializer_class = QuizSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticatedOrReadOnly]  # Allow public GET, restrict POST
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)  # Associate quiz with the logged-in user
+        serializer.save(user=self.request.user)
 
 
 class QuestionListView(generics.ListAPIView):
