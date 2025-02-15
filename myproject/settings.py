@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-&yh9u!oi4nn)=d#7ac-hu)#53nouy3ml$pu46hu=rohbpho41m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['quiz-rvml.onrender.com']
 
 
 # Application definition
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'drf_yasg',
     'hack',
+    'corsheaders',
 ]
 
 #AUTH_USER_MODEL = "account.CustomUser"
@@ -59,6 +60,7 @@ REST_FRAMEWORK = {
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -86,6 +88,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'myproject.wsgi.application'
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 
 # Database
