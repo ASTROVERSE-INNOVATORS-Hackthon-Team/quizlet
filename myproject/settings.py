@@ -102,6 +102,11 @@ DATABASES = {
     }
 }
 
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': None,  # Disable authentication in Swagger UI
+    'USE_SESSION_AUTH': False,  # Prevents redirect to /accounts/login/
+}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
