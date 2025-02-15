@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-&yh9u!oi4nn)=d#7ac-hu)#53nouy3ml$pu46hu=rohbpho41m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['quiz-rvml.onrender.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost','quiz-rvml.onrender.com']
 
 
 # Application definition
@@ -49,12 +49,9 @@ INSTALLED_APPS = [
 
 # REST Framework Authentication Settings
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ),
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    ),
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ]
 }
 
 
@@ -142,8 +139,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Use 'staticfiles' for collectstatic
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),  # This should contain your manually added static files
+]
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
